@@ -1,0 +1,18 @@
+
+            if (odeme_acik_txt.Text != "" && odeme_tutar_txt.Text != "")
+            {
+                DialogResult dr = new DialogResult();
+                dr = MessageBox.Show("odeme bilgilerini kaydetmek istiyor musunuz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dr == DialogResult.Yes)
+                {
+                    if (conn.State == ConnectionState.Closed)
+                        conn.Open();
+                    String sql = "insert into Odemeler (kart_no,od_tarih,tutar,aciklama) values (' " + kart_no_txt.Text + " ' , '" + odeme_trh_datetmpck.Text + "','" + odeme_tutar_txt.Text + "','" + odeme_acik_txt.Text + "')";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("odeme kaydedildi");
+                    conn.Close();
+
+                }
+           
